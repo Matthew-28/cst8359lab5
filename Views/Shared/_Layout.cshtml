@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <link rel="stylesheet" href="~/css/StyleSheet.css" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    @RenderSection("Scripts", false)
+</head>
+<body>
+    <header>
+        <h4> Matthew Sullivan (041069698) </h4>
+        <h4> Welcome to Lab 5! </h4>
+        @Html.ActionLink("Home", "Index", "Home")
+        @Html.ActionLink("Customers", "Index", "Customers")
+        @Html.ActionLink("FoodDeliveryServices", "Index", "FoodDeliveryServices")
+    </header>
+    <div>
+        @RenderBody()
+    </div>
+    <footer>
+
+    </footer>
+</body>
+<foot>
+
+</foot>
+</html>

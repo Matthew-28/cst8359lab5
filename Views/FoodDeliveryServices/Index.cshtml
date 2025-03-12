@@ -1,0 +1,74 @@
+﻿@model Lab5.Models.ViewModels.DealsViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Title
+            </th>
+            <th>
+                Fee
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.FoodDeliveryServices != null) {
+        @foreach (var item in Model.FoodDeliveryServices) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fee)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+        }
+    </tbody>
+</table>
+
+@if (Model.Subscriptions != null) 
+{
+    <h3> Subscriptions: </h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    FoodDeliveryServiceId
+                </th>
+                <th>
+                    CustomerId
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Subscriptions)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FoodDeliveryServiceId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CustomerId)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
