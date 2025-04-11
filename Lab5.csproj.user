@@ -15,6 +15,6 @@
     <WebStackScaffolding_DbContextTypeFullName>Lab5.Data.DealsFinderDbContext</WebStackScaffolding_DbContextTypeFullName>
     <WebStackScaffolding_IsAsyncSelected>False</WebStackScaffolding_IsAsyncSelected>
     <WebStackScaffolding_IsViewGenerationSelected>True</WebStackScaffolding_IsViewGenerationSelected>
-    <NameOfLastUsedPublishProfile>C:\Users\sully\source\repos\Lab5\Properties\PublishProfiles\sull0270lab5 - Web Deploy.pubxml</NameOfLastUsedPublishProfile>
+    <NameOfLastUsedPublishProfile>C:\Users\sully\source\repos\Lab5\Properties\PublishProfiles\sull0270assignment2 - Web Deploy.pubxml</NameOfLastUsedPublishProfile>
   </PropertyGroup>
 </Project>
