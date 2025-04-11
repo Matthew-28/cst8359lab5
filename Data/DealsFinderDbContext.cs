@@ -12,12 +12,14 @@ namespace Lab5.Data
         public DbSet<Customer> Customers { get; set; }
         public DbSet<FoodDeliveryService> FoodDeliveryServices { get; set; }
         public DbSet<Subscription> Subscriptions { get; set; }
+        public DbSet<Deal> Deals { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Customer>().ToTable("Customer");
             modelBuilder.Entity<FoodDeliveryService>().ToTable("FoodDeliveryService");
             modelBuilder.Entity<Subscription>().ToTable("Subscription");
+            modelBuilder.Entity<Deal>().ToTable("Deal");
         }
     }
 }

@@ -1,0 +1,35 @@
+﻿@model Lab5.Models.ViewModels.DealsViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Upload</h1>
+<h4>Upload an Image</h4>
+<hr />
+
+@foreach (var item in Model.FoodDeliveryServices)
+{
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create" enctype="multipart/form-data">
+
+                <div class="form-group">
+                    <input name="ImageLink" type="file">
+                </div>
+
+                <div class="form-group">
+                    <input type="hidden" name="FoodDeliveryServiceId" value=@item.Id />
+                </div>
+
+                <div class="form-group">
+                    <button name="Upload" class="btn btn-primary">Upload Now</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Back">Back to List</a>
+    </div>
+}

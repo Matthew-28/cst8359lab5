@@ -1,0 +1,79 @@
+﻿@model Lab5.Models.ViewModels.DealsViewModel
+
+@{
+    ViewData["Title"] = "Edit Subscriptions";
+}
+@{
+    var alpha = false;
+    var beta = false;
+    var omega = false;
+}
+
+@foreach (var item in Model.Customers)
+{
+    <h1>Edit</h1>
+
+    <h4>Customer</h4>
+
+    <p>
+        Full Name
+        @Html.DisplayFor(modelItem => item.FullName)
+    </p>
+
+    @foreach (var sub in Model.Subscriptions)
+    {
+        switch(sub.FoodDeliveryServiceId)
+        {
+            case("A1"):
+                alpha = true;
+                break;
+            case("B1"):
+                beta = true;
+                break;
+            case ("O1"):
+                omega = true;
+                break;
+        }
+    }
+
+    @if (alpha == false)
+    {
+        <b>Alpha </b>
+        @Html.ActionLink("Register", "AddSubscriptions", "Customers", new{customerId=@item.Id, serviceId="A1"})
+        <br>
+    }
+    @if (beta == false)
+    {
+        <b>Beta </b> 
+        @Html.ActionLink("Register", "AddSubscriptions", "Customers", new { customerId = @item.Id, serviceId = "B1" })
+        <br>
+    }
+    @if (omega == false)
+    {
+        <b>Omega </b> 
+        @Html.ActionLink("Register", "AddSubscriptions", "Customers", new { customerId = @item.Id, serviceId = "O1" })
+        <br>
+    }
+
+    @if (alpha == true)
+    { 
+        <b>Alpha </b> 
+        @Html.ActionLink("Unregister", "RemoveSubscriptions", "Customers", new { customerId = @item.Id, serviceId = "A1" })
+        <br>
+    }
+    @if (beta == true)
+    {
+        <b>Beta </b> 
+        @Html.ActionLink("Unregister", "RemoveSubscriptions", "Customers", new { customerId = @item.Id, serviceId = "B1" })
+        <br>
+    }
+    @if (omega == true)
+    {
+        <b>Omega </b> 
+        @Html.ActionLink("Unregister", "RemoveSubscriptions", "Customers", new { customerId = @item.Id, serviceId = "O1" })
+        <br>
+    }
+
+    <br>
+    <a asp-action="Index">Back to List</a>
+}

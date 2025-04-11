@@ -52,6 +52,15 @@ namespace Lab5.Data
             }
             context.SaveChanges();
 
+            var deals = new Deal[]
+            {
+                new Deal{DealId=1,ImageLink="~/images/computer_image.jpg",FoodDeliveryServiceId="A1"}
+            };
+            foreach (var deal in deals)
+            {
+                context.Deals.Add(deal);
+            }
+            context.SaveChanges();
         }
     }
 

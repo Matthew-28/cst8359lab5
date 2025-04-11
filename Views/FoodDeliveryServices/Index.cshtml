@@ -32,6 +32,8 @@
                     @Html.DisplayFor(modelItem => item.Fee)
                 </td>
                 <td>
+                    <a asp-action="Index" asp-route-id="@item.Id">Select</a> |
+                    <a asp-action="Deal" asp-route-id="@item.Id">Deals</a> |
                     <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                     <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                     <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
@@ -42,33 +44,18 @@
     </tbody>
 </table>
 
-@if (Model.Subscriptions != null) 
+@if (Model.FoodDeliveryServices != null && Model.Subscriptions != null)
 {
-    <h3> Subscriptions: </h3>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    FoodDeliveryServiceId
-                </th>
-                <th>
-                    CustomerId
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.Subscriptions)
+    <h2>Subscribers to the FoodDeliveryServices</h2>
+    @foreach (var item in Model.Subscriptions)
+    {
+        @foreach (var item2 in Model.Customers)
+        {
+            if (item.CustomerId == item2.Id)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.FoodDeliveryServiceId)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CustomerId)
-                    </td>
-                </tr>
+                @Html.DisplayFor(modelItem => item2.FullName)
+                <br>
             }
-        </tbody>
-    </table>
+        }
+    }
 }

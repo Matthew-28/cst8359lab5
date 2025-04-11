@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Lab5.Data;
 using Lab5.Models;
+using Lab5.Models.ViewModels;
+using System.Diagnostics;
 
 namespace Lab5.Controllers
 {
@@ -20,9 +22,29 @@ namespace Lab5.Controllers
         }
 
         // GET: Customers
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int id = 0)
         {
-            return View(await _context.Customers.ToListAsync());
+            var viewModel = new DealsViewModel
+            {
+                Subscriptions = await _context.Subscriptions
+                  .AsNoTracking()
+                  .Where(i => i.CustomerId == id)
+                  .OrderBy(i => i.FoodDeliveryServiceId)
+                  .ToListAsync(),
+
+                FoodDeliveryServices = await _context.FoodDeliveryServices
+                  .AsNoTracking()
+                  .OrderBy(i => i.Id)
+                  .ToListAsync(),
+
+                Customers = await _context.Customers
+                  .AsNoTracking()
+                  .OrderBy(i => i.Id)
+                  .ToListAsync()
+            };
+
+            return View(viewModel);
+            //return View(await _context.Customers.ToListAsync());
         }
 
         // GET: Customers/Details/5
@@ -114,6 +136,43 @@ namespace Lab5.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(customer);
+        }
+
+        public async Task<IActionResult> EditSubscriptions(int? id)
+        {
+            var viewModel = new DealsViewModel
+            {
+                Customers = await _context.Customers
+                  .AsNoTracking()
+                  .Where(i => i.Id == id)
+                  .ToListAsync(),
+
+                Subscriptions = await _context.Subscriptions
+                  .AsNoTracking()
+                  .Where(i => i.CustomerId == id)
+                  .OrderBy(i => i.FoodDeliveryServiceId)
+                  .ToListAsync()
+            };
+
+            return View(viewModel);
+        }
+
+        public async Task<IActionResult> AddSubscriptions(int customerId, String serviceId)
+        {
+            _context.Add(new Subscription { CustomerId = customerId, FoodDeliveryServiceId = serviceId });
+            await _context.SaveChangesAsync();
+            return RedirectToAction("EditSubscriptions", "Customers", new { id = customerId });
+        }
+
+        public async Task<IActionResult> RemoveSubscriptions(int customerId, String serviceId)
+        {
+            var subscription = await _context.Subscriptions.FindAsync(customerId, serviceId);
+            if (subscription != null)
+            {
+                _context.Subscriptions.Remove(subscription);
+            }
+            await _context.SaveChangesAsync();
+            return RedirectToAction("EditSubscriptions", "Customers", new { id = customerId });
         }
 
         // GET: Customers/Delete/5

@@ -5,5 +5,6 @@
         public IEnumerable<Customer> Customers { get; set; }
         public IEnumerable<FoodDeliveryService> FoodDeliveryServices { get; set; }
         public IEnumerable<Subscription> Subscriptions { get; set; }
+        public IEnumerable<Deal> Deals { get; set; }
     }
 }

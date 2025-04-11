@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Lab5.Models.Customer>
+﻿@model Lab5.Models.ViewModels.DealsViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -13,35 +13,54 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.LastName)
+                First Name
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FirstName)
+                Last Name
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.BirthDate)
+                Birth Date
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BirthDate)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @if (Model.Customers != null) {
+            @foreach (var item in Model.Customers) {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BirthDate)
+                    </td>
+                    <td>
+                        <a asp-action="Index" asp-route-id="@item.Id">Select</a> |
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="EditSubscriptions" asp-route-id="@item.Id">Edit Subscriptions</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        }
     </tbody>
 </table>
+
+@if (Model.FoodDeliveryServices != null && Model.Subscriptions != null)
+{
+    <h2>Member of the following FoodDeliveryServices</h2>
+    @foreach(var item in Model.Subscriptions)
+    {
+        @foreach(var item2 in Model.FoodDeliveryServices)
+        {
+            if (item.FoodDeliveryServiceId == item2.Id)
+            {
+                @Html.DisplayFor(modelItem => item2.Title) <br>
+            }
+        }
+    }
+}

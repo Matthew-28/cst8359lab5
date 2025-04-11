@@ -6,7 +6,11 @@ by editing this MSBuild file. In order to learn more about this please visit htt
 <Project>
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <History>True|2025-03-12T21:06:57.8116421Z||;True|2025-03-12T17:01:17.8234007-04:00||;True|2025-03-12T16:56:25.7941456-04:00||;True|2025-03-12T16:48:26.4242142-04:00||;True|2025-03-12T16:44:05.8149250-04:00||;True|2025-03-12T16:22:45.2738487-04:00||;</History>
-    <LastFailureDetails />
+    <EncryptedPassword />
   </PropertyGroup>
+  <ItemGroup>
+    <AzureDBConnectionStrings Include="Data Source=sull0270sqlserver.database.windows.net,1433;Initial Catalog=sull0270lab5;Authentication=ActiveDirectoryManagedIdentity" />
+    <AzureDBConnectionStrings Include="REDACTED" />
+    <AzureDBConnectionStrings Include="Server=tcp:sull0270sqlserver.database.windows.net;Authentication=Active Directory Default;Database=sull0270lab5" />
+  </ItemGroup>
 </Project>

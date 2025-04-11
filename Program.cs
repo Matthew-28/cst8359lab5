@@ -42,6 +42,8 @@ namespace Lab5
 
             app.UseSession();
 
+            app.UseStaticFiles();
+
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");

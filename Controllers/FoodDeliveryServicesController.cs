@@ -22,22 +22,34 @@ namespace Lab5.Controllers
 
 
         // GET: FoodDeliveryServices
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string id = "")
         {
             var viewModel = new DealsViewModel
             {
+                Subscriptions = await _context.Subscriptions
+                  .AsNoTracking()
+                  .Where(i => i.FoodDeliveryServiceId == id)
+                  .OrderBy(i => i.CustomerId)
+                  .ToListAsync(),
+
                 FoodDeliveryServices = await _context.FoodDeliveryServices
                   .AsNoTracking()
                   .OrderBy(i => i.Id)
                   .ToListAsync(),
 
-                Subscriptions = await _context.Subscriptions
+                Customers = await _context.Customers
                   .AsNoTracking()
-                  .OrderBy(i => i.FoodDeliveryServiceId)
+                  .OrderBy(i => i.Id)
                   .ToListAsync()
             };
+
             return View(viewModel);
             //return View(await _context.FoodDeliveryServices.ToListAsync());
+        }
+
+        public async Task<IActionResult> Deal(string id)
+        {
+            return RedirectToAction("Index", "Deals", new { serviceId = id });
         }
 
         // GET: FoodDeliveryServices/Details/5
